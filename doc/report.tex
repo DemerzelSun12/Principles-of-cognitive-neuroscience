@@ -1,0 +1,378 @@
+% !TeX program = xelatex 
+\documentclass{hitreport}
+\usepackage{url}
+\usepackage{algorithm,float}  
+\usepackage{algpseudocode}  
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{threeparttable}
+\usepackage{subfig}
+\usepackage{listings} %插入代码
+\usepackage{xcolor} %代码高亮
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning}
+
+
+
+
+\lstset{numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm  
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+% =============================================
+% Part 0 Edit the info
+% =============================================
+
+\major{计算机科学与技术}
+\name{孙骁}
+\title{认知神经科学原理\\实验报告}
+\stuid{1180300811} % 学号
+\college{计算学部}
+\date{\today}
+\lab{格物213} %实验地点
+\course{认知神经科学原理}
+\instructor{马琳}
+% \grades{}
+\expname{信息相关电位认知实验\\听觉Oddball实验} %实验名称
+% \exptype{} % 实验类型
+% \partner{} % 同组学生名字
+\term{2020秋季学期}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+% =============================================
+% Part 1 Header
+% =============================================
+
+
+
+% =============================================
+% Part 2 Main document
+% =============================================
+
+\section{ERPs定义及性质}
+
+首先介绍诱发电位(Evoked Potentials, EPs)，也称为诱发反应，是指给予神经系统特定的刺激，或使大脑对刺激的信息进行加工，在该系统和脑的相应部位产生的可以检出的、与刺激有相对固定时间间隔和特定位相的生物电反应\cite{LEGATT2014228}。
+
+ERP(Event-Related Potential)即事件相关电位\cite{Sur2009}，是一种特殊的脑诱发电位，是大脑的特定脑区在受到不同刺激时记录的电位变化。ERP研究方法是将刺激事件，包括:视觉、听觉、体感等物理刺激和心理因素，在大脑内引起的相关反应，客观的表达出来，为观察认知活动在不同时间进程中的脑功能活动状态，研究人类心理和行为的神经机制，以及认知的发展、成熟、衰退过程提供可靠的实验技术方法\cite{Luck2014}。
+
+ERP的性质如下：
+
+\begin{enumerate}
+\item ERPs不像普通诱发电位记录神经系统对刺激本身产生的反应，而是大脑对刺激带来的信息引起的反应\cite{Sur2009}。是在注意的基础上，与识别、比较、判断、记忆、决断等心理活动有关，反映了认知过程中大脑的神经电生理改变。
+\item ERPs成分除受刺激物理特性影响的“外源性(生理性)成分”，还包括不受刺激物理特性的影响“内源性(心理性)成分”，与被试的精神状态和注意力有关\cite{Luck2014}。
+\item ERPs属于长潜伏期诱发电位，测试时一般要求被试者清醒，并在一定程度上参与其中。
+\end{enumerate}
+
+
+
+\section{脑认知功能与ERPs关联关系}
+
+\paragraph{脑认知功能}~{}
+
+大脑的认知功能是一种心理过程，可以使我们接收，选择，存储，转换，发展和恢复从外部刺激中收到的信息\cite{Zhang1907}。这个过程使我们能够更有效地理解世界并与之建立联系。认知功能是一种基于大脑的感知技能，我们需要执行从最简单到最复杂的任何任务。它们与我们学习，记忆，解决问题和注意力的机制有关。
+
+\paragraph{脑认知功能与ERPs的关系}~{}
+
+借助ERPs的分析方法是研究大脑信息处理阶段认知功能的最常用的动态方法之一\cite{Luck2014}。通过使用相应工具测量相关脑区上的ERP的数据提供了有关早期感觉感知过程和更高级处理的信息，包括注意状态，皮质抑制，决策反应，错误监测，记忆更新和其他认知活动\cite{soc2017}。基于ERP的研究方法是研究典型受试者的规范性认知过程的一种有价值的技术，同时，ERP可以用作评估具有神经发育疾病的儿童(例如ASD和ADHD)\cite{soc2019}或患有各种精神病的成年个体差异的敏感工具(例如PTSD，ASD，SCZ，物质使用障碍[SUD]等)\cite{soc2018}\cite{Baruth2010}。
+
+尽管功能性神经影像学(例如功能性磁共振成像[fMRI]或正电子发射断层扫描[PET])取得了重大进展，但因为许多精神病性疾病与可检测到的脑电图反应模式改变有关，ERP仍然是精神病学中的一种重要的大脑研究方法。ERP技术在精神病理学中可以用作功能诊断目的的有效和敏感的生物标记(例如阿尔兹海默症)\cite{Horvath2018}。另一方面，对神经发育障碍者的ERP与普通人的ERP之间差异的比较可以有助于更好地理解神经发育障碍和其他精神病学中扰乱的认知功能\cite{LAUZHU2019100635}。
+
+\section{认知神经科学实验范式及意义}
+
+\subsection{听觉Oddball实验及结果分析}
+
+\subsubsection{听觉Oddball实验介绍}
+
+\paragraph{实验目的及意义}~{}
+ 
+探究人在加工小概率刺激时，大脑的异常反应。经典Oddball范式为在一项实验中，随机呈现作用于同一感觉通道的两种刺激，刺激出现的概率有很大差别。概率大者我们称之为标准刺激（standard stimuli），相当于是整个实验中的背景；概率小和偶然出现的刺激则为偏差刺激（deviant stimuli）。
+
+\paragraph{实验流程}~{}
+ 
+实验共包含两种声音刺激，两种声音刺激除音高外完全相同，两种声音出现的频率不同（高音：低音=1：4）。两种声音随机出现，被试需对两种声音刺激做出不同的按键反应。
+
+\paragraph{问题}~{}
+
+\begin{enumerate}
+\item 计算标准刺激和偏差刺激对应的准确率以及反应时长，并进行比较和分析；
+\item 分析标准刺激和偏差刺激对应的ERP差异，并测量幅值、潜伏期差异对应的脑区、电极以及时间；
+\item 请检索与实验相关5篇文献综述与之相关结果。
+\end{enumerate}
+
+\paragraph{事件码}~{}
+\newline
+11： 2000Hz声音刺激\\
+22： 500Hz声音刺激\\
+1： 对2000Hz声音进行按键响应\\
+2： 对500Hz声音进行按键响应
+
+\subsubsection{听觉Oddball实验结果分析}
+
+\paragraph{问题一}~{}\label{sec:oddballques1}
+
+对实验数据进行预处理，得到采样频率为1000Hz的预处理实验数据，将EEG结构体的event属性导出到excel中，得到如图(\ref{fig:oddexcel})的结果。
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.3]{oddexcel.png}
+\caption{将Oddball实验的事件信息导入Excel结果}\label{fig:oddexcel}
+\end{figure}
+
+由于在实验中我对于高频和低频按键记反，所以事件码1和2正好相反。将Excel文件转化为csv文件，编写代码计算事件码11和事件码2之间以及事件码22和事件码1之间的平均反应时长，以及计算标准刺激以及偏差刺激对应的准确率。
+
+实验的代码如下：
+\lstinputlisting[language=python]{../src/oddball.py}
+
+最终得到的结果如log文件所示。
+\begin{lstlisting}[language=bash]
+the number of high frequency(11) is 51
+the number of low frequency(22) is 249
+the response accuracy of high frequency(11) is 1.0
+the response accuracy of low frequency(22) is 1.0
+the average of reaction time of high frequency(11) is 519.843137254902
+the average of reaction time of low frequency(22) is 555.6586345381526
+\end{lstlisting}
+
+
+高音刺激与低音刺激对应的准确率均为100\%，高音刺激的平均反应时间为519.84ms，低音刺激的平均反应时间为555.66ms。
+
+\paragraph{问题二}~{}
+
+标准刺激叠加后的ERP频谱图如图(\ref{fig:standardERP})所示，偏差刺激叠加后的ERP频谱图如图(\ref{fig:pianchaERP})所示。采样频率设置为30\%，画出的脑地形图频率为6Hz、10Hz、22Hz和40Hz，画出的频带范围是1$\sim$45Hz。
+
+\begin{figure}[htb]
+	\centering
+	\subfloat[标准刺激叠加后的ERP频谱图]{\label{fig:standardERP}\includegraphics[scale=0.2]{listen_erp_22.jpg}}\hspace{5pt}
+	\subfloat[偏差刺激叠加后的ERP频谱图]{\label{fig:pianchaERP}\includegraphics[scale=0.2]{listen_erp_11.jpg}}
+	\caption{特征提取部分运行结果}\label{fig:feature}
+\end{figure}
+
+对标准刺激和偏差刺激的ERP进行对比，得到的结果如图(\ref{fig:ERPcompare})所示，点击不同的电极进行分析，我们发现，标准刺激在200$\sim$300ms之间达到峰值，而偏差刺激在500$\sim$600ms之间达到峰值，也就是说，偏差刺激得到的ERP峰值普遍比标准刺激得到的ERP峰值滞后300ms左右的时间。
+
+\begin{figure}[htb]
+\centering
+\includegraphics[height=0.4\textheight]{ERPcompare.jpg}
+\caption{标准刺激与偏差刺激的ERP比较}\label{fig:ERPcompare}
+\end{figure}
+
+对偏差刺激进行分析，发现在565ms时达到波峰值，幅值约为5.0mV，主要活跃的脑区为左侧顶叶和左侧额叶，如图(\ref{fig:11high})所示，查看左侧额叶和左侧顶叶附近的电极，如图(\ref{fig:11highdetails})所示，在565ms左右也符合上述变化趋势，特别是电极FT7(\ref{fig:FT7high})、T7(\ref{fig:T7high})、C5(\ref{fig:C5high})、TP7(\ref{fig:TP7high})的特征很明显。
+
+对标准刺激进行分析，发现在450ms时达到波峰值，幅值约为3.5mV，主要活跃的脑区为左侧顶叶和左侧额叶，如图(\ref{fig:22low})所示，查看左侧额叶和左侧顶叶附近的电极，如图(\ref{fig:22lowdetails})所示，在450ms左右也符合上述变化趋势，特别是电极FT7(\ref{fig:FT7low})、T7(\ref{fig:T7low})、C5(\ref{fig:C5low})、TP7(\ref{fig:TP7low})、P7(\ref{fig:P7low})的特征很明显。
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.4]{11high.jpg}
+\caption{偏差刺激的峰值}\label{fig:11high}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+	\subfloat[F7电极对偏差刺激的ERP]{
+		\label{fig:F7high}\includegraphics[width=.25\textwidth]{F7high.jpg}}
+	\subfloat[F5电极对偏差刺激的ERP]{
+		\label{fig:F5high}\includegraphics[width=.25\textwidth]{F5high.jpg}}
+	\subfloat[FT7电极对偏差刺激的ERP]{
+		\label{fig:FT7high}\includegraphics[width=.25\textwidth]{FT7high.jpg}}
+	\subfloat[FC5电极对偏差刺激的ERP]{
+		\label{fig:FC5high}\includegraphics[width=.25\textwidth]{FC5high.jpg}}
+	\\
+	\subfloat[FC3电极对偏差刺激的ERP]{
+		\label{fig:FC3high}\includegraphics[width=.25\textwidth]{FC3high.jpg}}
+	\subfloat[T7电极对偏差刺激的ERP]{
+		\label{fig:T7high}\includegraphics[width=.25\textwidth]{T7high.jpg}}
+	\subfloat[C5电极对偏差刺激的ERP]{
+		\label{fig:C5high}\includegraphics[width=.25\textwidth]{C5high.jpg}}
+	\subfloat[C3电极对偏差刺激的ERP]{
+		\label{fig:C3high}\includegraphics[width=.25\textwidth]{C3high.jpg}}
+	\\
+	\subfloat[TP7电极对偏差刺激的ERP]{
+		\label{fig:TP7high}\includegraphics[width=.25\textwidth]{TP7high.jpg}}
+	\subfloat[CP3电极对偏差刺激的ERP]{
+		\label{fig:CP3high}\includegraphics[width=.25\textwidth]{CP3high.jpg}}
+	\subfloat[P7电极对偏差刺激的ERP]{
+		\label{fig:P7high}\includegraphics[width=.25\textwidth]{P7high.jpg}}
+	\subfloat[P5电极对偏差刺激的ERP]{
+		\label{fig:P5high}\includegraphics[width=.25\textwidth]{P5high.jpg}}
+\caption{左侧额叶的左侧顶叶附近电极对偏差刺激的ERP}\label{fig:11highdetails}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.4]{22low.jpg}
+\caption{标准刺激的峰值}\label{fig:22low}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+	\subfloat[F7电极对标准刺激的ERP]{
+		\label{fig:F7low}\includegraphics[width=.25\textwidth]{F7low.jpg}}
+	\subfloat[FT7电极对标准刺激的ERP]{
+		\label{fig:FT7low}\includegraphics[width=.25\textwidth]{FT7low.jpg}}
+	\subfloat[T7电极对标准刺激的ERP]{
+		\label{fig:T7low}\includegraphics[width=.25\textwidth]{T7low.jpg}}
+	\subfloat[C5电极对标准刺激的ERP]{
+		\label{fig:C5low}\includegraphics[width=.25\textwidth]{C5low.jpg}}
+	\\
+	\subfloat[TP7电极对标准刺激的ERP]{
+		\label{fig:TP7low}\includegraphics[width=.25\textwidth]{TP7low.jpg}}
+	\subfloat[CP5电极对标准刺激的ERP]{
+		\label{fig:CP5low}\includegraphics[width=.25\textwidth]{CP5low.jpg}}
+	\subfloat[P7电极对标准刺激的ERP]{
+		\label{fig:P7low}\includegraphics[width=.25\textwidth]{P7low.jpg}}
+	\subfloat[P5电极对标准刺激的ERP]{
+		\label{fig:P5low}\includegraphics[width=.25\textwidth]{P5low.jpg}}
+\caption{左侧额叶的左侧顶叶附近电极对标准刺激的ERP}\label{fig:22lowdetails}
+\end{figure}
+
+
+\paragraph{问题三}~{}
+
+\begin{enumerate}
+\item Event-related potentials in the auditory oddball as a function of EEG alpha phase at stimulus onset\cite{Barry2004}
+
+\hspace{2em}本文旨在通过利用正交相位效应的概念，来研究固定时间间隔的听觉oddball实验中刺激作用时EEG的 $\alpha$波活动的情况与ERPs之间的关系。实验让14名受试者受到4组目标概率为50\%的150刺激，通过检查受试者对按钮按压的EEG的反应，对EEG信号进行滤波处理后，对每个受试者评估刺激前后的$\alpha$波。结果显示，在本次实验中，大脑状态对表现负向刺激的驱动力比正向刺激的驱动力高出8\%，且在waxing阶段会比waning阶段提高33\%，这与N1延迟增加和N2振幅减小相关。这些反映了刺激开始时$\alpha$波的频率和振幅的系统变化。因此，在固定时间间隔的的刺激范式中，动态调节EEG的成分频率，以便在刺激表现时更好地展示大脑状态，从而有差别地判断刺激过程在EEG结果中的相关性。
+
+\item EEG alpha activity and the ERP to target stimuli in an auditory oddball paradigm\cite{Barry2000}
+
+\hspace{2em}本文采用了固定时间间隔刺激的oddball实验，以获得ERP中N1P2和N2P3组件的峰-峰幅度与受试者体内受刺激前$\alpha$活性水平的关系。实验采取两种不同的音调作为刺激，概率各为50\%，分别向14位受试者提供了600个听觉刺激，需要受试者按目标按钮对不同音调做区分。对于每个试验，通过从8到13 Hz的滤波来评估Pz刺激前的$\alpha$活性，并使用$\alpha$波的RMS幅度对Pz和Cz处的ERPs进行排序。 对Pz和Cz处的分量振幅与Pz处的刺激前$\alpha$波建立关系，发现刺激前潜伏期的自发性脑电图与刺激后的$\alpha$波峰和波谷强烈相关。实验结果证实了中枢神经系统激活与刺激导致ERP的变化之间存在密切的关系。
+
+\item Principal components analysis of Laplacian waveforms as a generic method for identifying ERP generator patterns: I. Evaluation with auditory oddball tasks\cite{Kayser2006}
+
+\hspace{2em}本文评估了基于PCA的ERP波形简化与无参考Laplacian变换的有效性和可比性，以分离听觉oddball实验中与任务和响应相关的ERP生成器模式。实验中记录了66位惯用右手的成年人在使用音节或音调进行奇数球测试时记录的鼻子参考ERP，并计算球形样条电流源密度(CSD)波形以锐化ERP头皮形貌并消除体积传导的影响。ERP和CSD数据作为基于协方差的不受限制的时间PCA模型的输入，以分离时间和空间上存在相关性的ERP和CSD。
+
+\hspace{2em}实验结果显示，相应的ERP和CSD因素与已知的ERP组件明确相关。例如，中央的N1的偶极组织从包围西尔维安裂缝的分解前槽和后源中可以明显看出。与N2相关的因素的特征在于目标的不对称额外侧（音调：额颞R> L）和顶额颞（音调：额颞L> R）。一个单一的ERP因素总结了顶叶P3活性以及前阴性。相比之下，两个在360和560 ms达到峰值的CSD因子将具有前池的顶叶P3源与具有局部Fz池的向心P3源区分开。与按下按钮相比，发现了较小的顶叶但较大的左颞P3源用于静默计数。向左或向右按​​压会产生相反的，特定于中心位置的不对称区域，从而调节N2 / P3配合物。
+
+\end{enumerate}
+
+
+\subsection{信息相关电位认知实验及结果分析}
+
+\subsubsection{信息相关电位认知实验介绍}
+
+\paragraph{实验目的及意义}~{}
+
+当刺激材料含有信息时，脑在对刺激中的信息进行加工的过程中，是否会产生一系列信息加工相关的认知成分？信息加工过程中，脑活动的EEG/ERP表现是否存在？若存在，则该成分或者表现是否有一定的模式，呈现一定的规律？
+
+\paragraph{实验流程}~{}
+
+实验共有3轮，每轮5个blocks，每个block含有30个trials。
+实验时长36min。
+实验流程如图(\ref{fig:labinfor})所示
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.9]{infor.png}
+\caption{信息相关电位认知实验流程图}\label{fig:labinfor}
+\end{figure}
+
+在每个trial中，被试需根据当前显示的图像是否含有信息进行判断，含有信息按下键盘方向键左键，不含有信息的按下键盘方向键右键。
+
+\paragraph{问题}~{}
+
+\begin{enumerate}
+\item 请你分析在判断有信息和无信息时，准确率和反应时间有何区别？
+
+准确率：
+\begin{align}
+\text{有信息刺激的准确率} = \frac{\text{有信息刺激时，判断为有的数量}}{\text{有信息刺激的数量}}\\
+\text{无信息刺激的准确率} = \frac{\text{无信息刺激时，判断为无的数量}}{\text{无信息刺激的数量}}
+\end{align}
+反应时间为：在判断正确的trial中，反应时刻-刺激发生时刻
+
+\item 请分析
+\begin{enumerate}
+\item 在有信息刺激时，花鸟图案刺激引起的ERP和几何图像刺激引起的ERP有何差异？
+\item 在无信息刺激时，花鸟图案刺激引起的ERP和几何图像刺激引起的ERP有何差异？（分析ERP成分的幅值、潜伏期等差异即可）
+\end{enumerate}
+
+\item 请分析在几何图像trial中，含信息刺激引起的ERP与不含信息刺激引起的ERP有何差异？这些差异主要体现在哪些脑区（通过脑地形图说明）？
+\end{enumerate}
+
+
+\paragraph{信息相关电位实验事件码说明}~{}
+\newline
+31：三个扇形图案位置与开口方向完全随机分布，无信息刺激\\
+32：三个扇形图案位置固定，开口方向固定，有信息刺激\\
+33：三个扇形图案位置固定、开口方向随机，无信息刺激\\
+41：四个扇形图案位置与开口方向完全随机分布，无信息刺激\\
+42：四个扇形图案位置固定，开口方向固定，有信息刺激\\
+43：四个扇形图案位置固定、开口方向随机，无信息刺激\\
+51：花鸟图案完全随机分布，无信息刺激\\
+52：花鸟图案能形成人脸轮廓，有信息刺激\\
+53：花鸟图案完全随机分布，无信息刺激\\
+1：判断为有信息刺激\\
+2：判断为无信息刺激
+
+\subsubsection{信息相关电位认知实验结果分析}
+
+
+\newpage
+
+\renewcommand\refname{参考文献}
+ 
+\bibliographystyle{unsrt} %%参考文献的格式（可选的格式还有：plain）
+ 
+\bibliography{Reference.bib}    %%参考文件存储位置
+
+\newpage
+\begin{appendices}
+
+%\section{从wav文件读取数据——read\_wav\_from\_file.py}
+%
+%\lstinputlisting[language=python]{code/read_wav_from_file.py}
+%
+%\section{对语料计算短时能量值与过零率——energy\_zero\_crossing\_rate\_extract.py}
+%
+%\lstinputlisting[language=python]{code/read_wav_from_file.py}
+%
+%\section{对语料端点检测——voice\_endpoint\_detection.py}
+%
+%\lstinputlisting[language=python]{code/voice_endpoint_detection.py}
+%
+%\section{将语音短时能量、过零率、端点检测结果写入文件——write\_to\_file.py}
+%
+%\lstinputlisting[language=python]{code/write_to_file.py}
+
+\end{appendices}
+
+\end{document}
