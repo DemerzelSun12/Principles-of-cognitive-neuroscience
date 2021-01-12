@@ -161,8 +161,7 @@ ERP的性质如下：
 
 由于在实验中我对于高频和低频按键记反，所以事件码1和2正好相反。将Excel文件转化为csv文件，编写代码计算事件码11和事件码2之间以及事件码22和事件码1之间的平均反应时长，以及计算标准刺激以及偏差刺激对应的准确率。
 
-实验的代码如下：
-\lstinputlisting[language=python]{../src/oddball.py}
+实验的代码间附录\ref{app:oddball}
 
 最终得到的结果如log文件所示。
 \begin{lstlisting}[language=bash]
@@ -281,7 +280,18 @@ the average of reaction time of low frequency(22) is 555.6586345381526
 
 \hspace{2em}本文评估了基于PCA的ERP波形简化与无参考Laplacian变换的有效性和可比性，以分离听觉oddball实验中与任务和响应相关的ERP生成器模式。实验中记录了66位惯用右手的成年人在使用音节或音调进行奇数球测试时记录的鼻子参考ERP，并计算球形样条电流源密度(CSD)波形以锐化ERP头皮形貌并消除体积传导的影响。ERP和CSD数据作为基于协方差的不受限制的时间PCA模型的输入，以分离时间和空间上存在相关性的ERP和CSD。
 
-\hspace{2em}实验结果显示，相应的ERP和CSD因素与已知的ERP组件明确相关。例如，中央的N1的偶极组织从包围西尔维安裂缝的分解前槽和后源中可以明显看出。与N2相关的因素的特征在于目标的不对称额外侧（音调：额颞R> L）和顶额颞（音调：额颞L> R）。一个单一的ERP因素总结了顶叶P3活性以及前阴性。相比之下，两个在360和560 ms达到峰值的CSD因子将具有前池的顶叶P3源与具有局部Fz池的向心P3源区分开。与按下按钮相比，发现了较小的顶叶但较大的左颞P3源用于静默计数。向左或向右按​​压会产生相反的，特定于中心位置的不对称区域，从而调节N2 / P3配合物。
+\hspace{2em}实验结果显示，相应刺激的ERP和CSD结果与已知的ERP成分相关。例如，可以从包围Sylvian裂缝的前槽和后源中中央的N1的偶极组织附近明显看到。与N2相关的因素以不对称的额外侧（音调：额颞R>L）和顶颞（语音：顶颞L>R）汇为特征。一个单一的ERP因子总结了顶叶P3的活性，以及前叶的阴性反应。相反，两个CSD因子在360ms和560ms达到峰值，将具有前汇的顶叶P3源与具有明显局限性Fz汇的中心顶叶P3源区分开来。与按按钮相比，静默计数的顶叶较小，但左侧颞叶P3源较大。
+
+\hspace{2em}实验结果表明，CSD变换是ERP数据PCA的一个有价值的预处理步骤，为普遍存在的参考问题提供了一个独特的、有意义的解决方案。通过减少ERP冗余和生成更清晰、更简单的脑地形图，并且不丢失或扭曲任何感兴趣的效果，CSD-PCA解决方案复刻并扩展了以前与任务和响应相关的发现。
+
+\item ERP measures of stimulus processing during an auditory oddball task in Parkinson's disease: Evidence for an early information processing deficit\cite{Wright1996}
+
+\hspace{2em}本文将17名非特发性帕金森氏病的非痴呆患者与年龄和性别相匹配的对照组进行听觉oddball任务比较。通过无声计数或按下按钮来响应低概率目标音调。帕金森组的N1振幅减弱至目标音和非目标音，表明早期信息处理受到损害。相反，P2、N2和P3的幅度并未将患者与对照区分开。计数目标时，帕金森组几个峰值潜伏期(P2，N2和P3)增加，而通过按按钮确定目标时，只有N2被延迟。N2潜伏期越长，表明刺激分类所需的时间增加。早期ERP成分的幅度和潜伏期变化为帕金森氏病的早期信息处理受损提供了证据。
+
+\item Auditory processing in an inter-modal oddball task: Effects of a combined auditory/visual standard on auditory target ERPs\cite{Brown2007}
+
+\hspace{2em}先前的研究在多模式联动任务中对听觉oddball实验的受试者的ERP进行的研究表明，早期成分受模式内过程的影响，而ERP后期的成分(大约200$\sim$400ms)受多模式和多模式的影响。由此得出的结论是，听觉目标处理存在不同的阶段，早期的特定于情态的阶段和较晚的取决于上下文的阶段。本文通过研究在异类游戏中同时呈现视觉标准刺激和听觉标准刺激，以确定在此任务中包括视觉标准刺激是否会影响ERP达到目标。听觉-视觉oddball任务包括定期提出的听觉和视觉标准刺激(80\%和不常见的听觉目标(20\%)。将听觉-视觉oddball任务中目标的ERP与具有相同听觉刺激且没有视觉标准的听觉oddball任务中的ERP进行了比较。结果表明，早期组件N100，P200和N200在任务之间没有区别。这与先前研究的结果一致，并证实了长达200ms的活动不受视觉标准刺激的影响。后来的P250，P300和P350组件较大，并且在听觉-视觉oddball任务中显示出较大的脑地形图差异。特别是，P300和P350成分被认为代表了独立的模态和模态内成分。总的来说，这项研究提供了听觉加工在早期情态依赖阶段和后期情境依赖阶段这两个阶段发生的进一步证据。
+
 
 \end{enumerate}
 
@@ -345,6 +355,67 @@ the average of reaction time of low frequency(22) is 555.6586345381526
 
 \subsubsection{信息相关电位认知实验结果分析}
 
+\paragraph{问题一}~{}
+
+对实验数据进行预处理，得到采样频率为1000Hz的预处理实验数据，将EEG结构体的event属性导出到excel中，得到如图(\ref{fig:inforexcel})的结果。
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.3]{inforexcel.png}
+\caption{将信息相关电位实验的事件信息导入Excel结果}\label{fig:inforexcel}
+\end{figure}
+
+将Excel文件转化为csv文件，手动去掉了等待时间自己乱按的事件码，得到的data文件夹下的information.cv文件。编写代码计算事件码31、32、33、41、42、43、51、52和53对应的判断，并计算判断正确时的平均反应时长以及不同trial对应的有信息刺激准确率和无信息刺激准确率。
+
+实验的代码见附录\ref{app:information}。
+
+最终得到的结果如log文件所示。
+\begin{lstlisting}[language=bash]
+ineffective judge at line 2
+ineffective judge at line 3
+ineffective judge at line 63
+ineffective judge at line 251
+ineffective judge at line 254
+ineffective judge at line 291
+three sectors have information correct accuracy:0.9888888888888889
+three sectors have no information correct accuracy:0.9888888888888889
+the average of reaction time of three sectors is:946.1797752808989
+four sectors have information correct accuracy:0.9888888888888889
+four sectors have no information correct accuracy:1.0
+the average of reaction time of four sectors is:942.9162011173185
+flower and bird pattern have information correct accuracy:0.9333333333333333
+flower and bird pattern have no information correct accuracy:1.0
+the average of reaction time of flower and bird pattern is:958.0114942528736
+
+\end{lstlisting}
+
+根据结果来看，在实验中，我并没有出现对某个信息判断出错的情况，但是准确率并未达到100\%。这是因为每个trial刚开始的两三幅图片，系统并未等我作出判断就进行了翻页，根据之后对于平均反应时间的测量，估计系统设置自动翻页的时间为1s，不知道是否为系统的bug，也希望这里改进一下，等待受试者作出判断后再翻页。
+
+我将未及时进行判断的情况定义为失败的判断，因此得到：
+\begin{enumerate}
+\item 三个扇形图案有信息刺激准确率为98.89\%；
+\item 三个扇形图案无信息刺激准确率为98.89\%；
+\item 三个扇形图案的平均反应时间为946.18ms；
+\item 四个扇形图案有信息刺激准确率为98.89\%；
+\item 四个扇形图案无信息刺激准确率为100\%；
+\item 四个扇形图案的平均反应时间为942.92ms；
+\item 花鸟图案有信息刺激准确率为93.33\%；
+\item 花鸟图案无信息刺激准确率为100\%；
+\item 花鸟图案的平均反应时间为958.01ms。
+\end{enumerate}
+
+从实验结果来看，对于四个扇形图案的有信息刺激判断准确率与三个图案的有信息刺激判断准确率持平，对于四个扇形图案的无信息刺激判断准确率较三个图案的无信息刺激判断准确率有所提升，但是平均反应时间几乎相同；花鸟图案的有信息刺激判断准确率有所下降，平均反应时间与扇形判断相比也更长，可能是由于实验时紧张，担心翻页过快而未来得及进行判断有关，从而导致的准确率下降。
+
+
+\paragraph{问题二}~{}
+
+
+
+\paragraph{问题三}~{}
+
+
+\paragraph{问题四}~{}
+
 
 \newpage
 
@@ -357,13 +428,13 @@ the average of reaction time of low frequency(22) is 555.6586345381526
 \newpage
 \begin{appendices}
 
-%\section{从wav文件读取数据——read\_wav\_from\_file.py}
-%
-%\lstinputlisting[language=python]{code/read_wav_from_file.py}
-%
-%\section{对语料计算短时能量值与过零率——energy\_zero\_crossing\_rate\_extract.py}
-%
-%\lstinputlisting[language=python]{code/read_wav_from_file.py}
+\section{处理oddball听觉实验数据——oddball.py}\label{app:oddball}
+
+\lstinputlisting[language=python]{../src/oddball.py}
+
+\section{处理信息处理实验数据——information\_cognition.py}\label{app:information}
+
+\lstinputlisting[language=python]{../src/information_cognition.py}
 %
 %\section{对语料端点检测——voice\_endpoint\_detection.py}
 %
